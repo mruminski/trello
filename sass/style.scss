@@ -8,6 +8,10 @@
   height: 50vh;
   padding: 15px;
   display: inline-block;
+  &__header {
+    text-align: center;
+    text-transform: capitalize;
+  }
   &--todo { background: orangered; }
   &--doing { background: yellow; }
   &--done { background: greenyellow; }

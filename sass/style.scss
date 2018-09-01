@@ -1,0 +1,24 @@
+#board {
+  margin: 25px auto;
+  width: 1200px;
+}
+
+.column {
+  width: 350px;
+  height: 50vh;
+  padding: 15px;
+  display: inline-block;
+  &--todo { background: orangered; }
+  &--doing { background: yellow; }
+  &--done { background: greenyellow; }
+}
+
+.card {
+  width: 340px;
+  height: 20px;
+  padding: 5px;
+  background: rgba(255, 255, 255, .8);
+  color: black;
+  font-weight: bold;
+  text-transform: uppercase;
+}

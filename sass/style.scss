@@ -12,11 +12,13 @@
 }
 
 .column {
+  vertical-align: top;
   width: 350px;
   height: 50vh;
   padding: 15px;
   display: inline-block;
   &__header {
+    font-size: 1.5em;
     text-align: center;
     text-transform: capitalize;
   }
@@ -26,13 +28,35 @@
 }
 
 .card {
-  position: absolute;
   width: 340px;
   height: 20px;
   padding: 5px;
   margin: 5px 0;
+  display: inline-block;
   background: rgba(255, 255, 255, .8);
+  font-size: 1.25rem;
   color: black;
   font-weight: bold;
   text-transform: uppercase;
+}
+
+@media screen and (max-width: 768px) {
+  #board { width: 100%; }
+  .column { 
+    margin: 0 auto;
+    display: block;
+    &__header { font-size: 1.75rem; }
+  }
+  .card { font-size: 1.5rem; }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  #board { width: 100%; }
+  .column { 
+    margin: 0 auto;
+    width: 75%;
+    display: block;
+    &__header { font-size: 1.5rem;  }
+  }
+  .card { font-size: 1.25rem; }
 }

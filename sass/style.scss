@@ -58,5 +58,8 @@
     display: block;
     &__header { font-size: 1.5rem;  }
   }
-  .card { font-size: 1.25rem; }
+  .card { 
+    width: 100%;
+    font-size: 1.25rem; 
+  }
 }

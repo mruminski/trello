@@ -1,17 +1,25 @@
-var title = document.createElement('h1');
-title.id = 'title';
-title.innerText = 'Trello Board';
-document.body.appendChild(title);
+function Title(name) {
+  this.name = name || 'Trello Board';
+}
+
+Title.prototype.create = function() {
+  this.element = document.createElement('h1');
+  this.element.id = 'title';
+  this.element.innerText = this.name;
+  document.body.appendChild(this.element);
+}
+
+var title = new Title();
+title.create();
 
 function Board(name) {
   this.name = name;
 }
 
 Board.prototype.create = function() {
-  var self = this;
-  board = document.createElement('div');
-  board.id = this.name;
-  document.body.appendChild(board);
+  this.element = document.createElement('div');
+  this.element.id = this.name;
+  document.body.appendChild(this.element);
 }
 
 function Column(name) {
@@ -19,30 +27,34 @@ function Column(name) {
 }
 
 Column.prototype.create = function() {
-  var self = this;
-  column = document.createElement('div');
+  this.element = document.createElement('div');
   header = document.createElement('h3');
-  column.className = 'column column--'+this.name;
+  this.element.className = 'column column--'+this.name;
   header.className = 'column__header';
   header.innerText = this.name;
-  board.appendChild(column);
-  column.appendChild(header);
+  board.appendChild(this.element);
+  this.element.appendChild(header);
 }
 
-function Card() {}
+function Card() {
+  var col = document.querySelector('.column--todo');
+  this.col = col;
+}
 
 Card.prototype.create = function() {
-  card = document.createElement('div');
-  card.className = 'card';
-  card.innerText =  window.prompt('Enter a task name');
-  column.appendChild(card);
+  this.element = document.createElement('div');
+  this.element.className = 'card';
+  this.element.innerText =  window.prompt('Enter a task name');
+  this.col.appendChild(this.element);
 }
 
-function Button() {}
+function Button(text) {
+  this.text = text || 'Add a new task';
+}
 
 Button.prototype.create = function() {
   this.element = document.createElement('button');
-  this.element.innerText = 'Add a new task';
+  this.element.innerText = this.text;
   this.element.addEventListener('click', function() {
     var task = new Card();
     task.create();  

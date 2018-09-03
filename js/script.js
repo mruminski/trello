@@ -55,8 +55,25 @@ Button.prototype.create = function() {
   this.element = document.createElement('button');
   this.element.innerText = this.text;
   this.element.addEventListener('click', function() {
-    var task = new Card(todo);
-    task.create();  
+    var userChoice = window.prompt('Select a column number for a new task;'+
+      '1 - todo; 2 - doing; 3 - done');
+
+    switch (userChoice) {
+      case '1':
+        var task = new Card(todo);
+        task.create();
+        break;
+      case '2':
+        var task = new Card(doing);
+        task.create();
+        break;
+      case '3':
+        var task = new Card(done);
+        task.create();
+        break;
+      default:
+        window.alert('Wrong choice');
+    }
   });
   document.body.appendChild(this.element); 
 }

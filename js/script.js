@@ -36,16 +36,15 @@ Column.prototype.create = function() {
   this.element.appendChild(header);
 }
 
-function Card() {
-  var col = document.querySelector('.column--todo');
-  this.col = col;
+function Card(column) {
+  this.column = column;
 }
 
 Card.prototype.create = function() {
   this.element = document.createElement('div');
   this.element.className = 'card';
   this.element.innerText =  window.prompt('Enter a task name');
-  this.col.appendChild(this.element);
+  this.column.element.appendChild(this.element);
 }
 
 function Button(text) {
@@ -56,7 +55,7 @@ Button.prototype.create = function() {
   this.element = document.createElement('button');
   this.element.innerText = this.text;
   this.element.addEventListener('click', function() {
-    var task = new Card();
+    var task = new Card(todo);
     task.create();  
   });
   document.body.appendChild(this.element); 

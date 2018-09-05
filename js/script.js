@@ -1,3 +1,7 @@
+var genId = function() {
+  return Math.ceil(Math.random() * 1000);
+}
+
 function Title(name) {
   this.name = name || 'Trello Board';
 }
@@ -14,6 +18,7 @@ title.create();
 
 function Board(name) {
   this.name = name;
+  this.columns = [];
 }
 
 Board.prototype.create = function() {
@@ -24,64 +29,65 @@ Board.prototype.create = function() {
 
 function Column(name) {
   this.name = name;
+  this.id = genId();
 }
 
 Column.prototype.create = function() {
   this.element = document.createElement('div');
   header = document.createElement('h3');
   this.element.className = 'column column--'+this.name;
+  board.columns.push({ name: this.name, id: this.id });
+  // this.element.setAttribute('data-col', this.id);
+  this.element.id = this.id;
   header.className = 'column__header';
   header.innerText = this.name;
-  board.appendChild(this.element);
+  board.element.appendChild(this.element);
   this.element.appendChild(header);
 }
 
-function Card(column) {
+function Card(column, name) {
+  this.name = name;
   this.column = column;
 }
 
 Card.prototype.create = function() {
   this.element = document.createElement('div');
   this.element.className = 'card';
-  this.element.innerText =  window.prompt('Enter a task name');
-  this.column.element.appendChild(this.element);
+  this.element.innerText =  this.name;
+  var selectedColumn = document.getElementById(this.column);
+  selectedColumn.appendChild(this.element);
 }
 
 function Button(text) {
-  this.text = text || 'Add a new task';
-}
-
-var selectCol = function() {
-  var userChoice = window.prompt('Select a column number for a new task;'+
-  '1 - todo; 2 - doing; 3 - done');
-
-  switch (userChoice) {
-    case '1':
-      var task = new Card(todo);
-      task.create();
-      break;
-    case '2':
-      var task = new Card(doing);
-      task.create();
-      break;
-    case '3':
-      var task = new Card(done);
-      task.create();
-      break;
-    default:
-      window.alert('Wrong choice');
-  }
+  this.text = text || 'Add task';
 }
 
 Button.prototype.create = function() {
   this.element = document.createElement('button');
+  this.element.className = 'btn';
   this.element.innerText = this.text;
-  this.element.addEventListener('click', selectCol);
+  this.element.addEventListener('click', function() {
+    var wrapper = document.createElement('div');
+    var select = document.createElement('select');
+    var columnsLen = board.columns.length;
+    for (var i = 0; i < columnsLen; i++) {
+      var option = document.createElement('option');
+      option.setAttribute('id', board.columns[i].id);
+      option.innerText = board.columns[i].name;
+      select.appendChild(option);
+    }
+    wrapper.appendChild(select);
+    document.body.appendChild(wrapper);
+    select.addEventListener('change', function(e) {
+      var card = new Card(e.target.selectedOptions[0].id, window.prompt('Enter a task name'));
+      card.create();
+    })
+  })
   document.body.appendChild(this.element); 
 }
 
-var trello = new Board('board');
-trello.create();
+var board = new Board('board');
+board.create();
 
 var todo = new Column('todo');
 todo.create();

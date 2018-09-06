@@ -37,8 +37,7 @@ Column.prototype.create = function() {
   header = document.createElement('h3');
   this.element.className = 'column column--'+this.name;
   board.columns.push({ name: this.name, id: this.id });
-  // this.element.setAttribute('data-col', this.id);
-  this.element.id = this.id;
+  this.element.setAttribute('data-col', this.id);
   header.className = 'column__header';
   header.innerText = this.name;
   board.element.appendChild(this.element);
@@ -54,7 +53,7 @@ Card.prototype.create = function() {
   this.element = document.createElement('div');
   this.element.className = 'card';
   this.element.innerText =  this.name;
-  var selectedColumn = document.getElementById(this.column);
+  var selectedColumn = document.querySelector("[data-col='"+this.column+"']");
   selectedColumn.appendChild(this.element);
 }
 

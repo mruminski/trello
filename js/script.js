@@ -68,6 +68,9 @@ Button.prototype.create = function() {
   this.element.addEventListener('click', function() {
     var wrapper = document.createElement('div');
     var select = document.createElement('select');
+    var optionDefault = document.createElement('option');
+    optionDefault.innerText = 'Select column';
+    select.appendChild(optionDefault);
     var columnsLen = board.columns.length;
     for (var i = 0; i < columnsLen; i++) {
       var option = document.createElement('option');
@@ -80,6 +83,7 @@ Button.prototype.create = function() {
     select.addEventListener('change', function(e) {
       var card = new Card(e.target.selectedOptions[0].id, window.prompt('Enter a task name'));
       card.create();
+      e.target.selectedIndex = '';
     })
   })
   document.body.appendChild(this.element); 

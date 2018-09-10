@@ -1,0 +1,86 @@
+:root { font-size: 16px; }
+
+body {
+  text-align: center;
+}
+
+#title {
+  font-size: 2rem;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+}
+
+#board {
+  margin: 25px auto;
+  width: 1200px;
+}
+
+.column {
+  vertical-align: top;
+  width: 350px;
+  height: 50vh;
+  padding: 15px;
+  display: inline-block;
+  &__header {
+    font-size: 1.5em;
+    text-align: center;
+    text-transform: capitalize;
+  }
+  &--todo { background: orangered; }
+  &--doing { background: yellow; }
+  &--done { background: greenyellow; }
+}
+
+.card {
+  width: 340px;
+  height: 20px;
+  padding: 5px;
+  margin: 5px 0;
+  display: inline-block;
+  background: rgba(255, 255, 255, .8);
+  font-size: 1.25rem;
+  color: black;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.btn {
+  width: 120px;
+  height: 40px;
+  margin: 10px 0;
+  border: 2px dashed black;
+  background-color: white;
+  font-size: 1.4rem;
+  color: black;
+}
+
+select {
+  padding: 5px;
+  border: none;
+  background: transparent;
+  font-size: 1.3rem;
+}
+
+@media screen and (max-width: 768px) {
+  #board { width: 100%; }
+  .column { 
+    margin: 0 auto;
+    display: block;
+    &__header { font-size: 1.75rem; }
+  }
+  .card { font-size: 1.5rem; }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  #board { width: 100%; }
+  .column { 
+    margin: 0 auto;
+    width: 75%;
+    display: block;
+    &__header { font-size: 1.5rem;  }
+  }
+  .card { 
+    width: 100%;
+    font-size: 1.25rem; 
+  }
+}
